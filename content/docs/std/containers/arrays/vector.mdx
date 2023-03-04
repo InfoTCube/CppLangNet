@@ -9,15 +9,16 @@ hide_title:			true
 cppreference_origin_rel: w/cpp/container/vector
 ---
 
-import ClassSummary				from "@site-comps/ClassSummary";
-import SymbolTable, { Symbol }	from "@site-comps/SymbolTable";
-import Columns					from "@site-comps/Columns";
-import Image					from "@site-comps/Image";
-import NotFinished				from "@site/i18n/en/presets/NotFinished.mdx";
-import ImproveSection			from "@site/i18n/en/presets/ImproveSection.mdx";
-import SwitchView				from "@site-comps/SwitchView";
-import Tabs						from "@theme/Tabs";
-import TabItem					from "@theme/TabItem";
+import ClassSummary					from "@site-comps/ClassSummary";
+import SymbolTable, { Symbol }		from "@site-comps/SymbolTable";
+import Columns						from "@site-comps/Columns";
+import Image						from "@site-comps/Image";
+import NotFinished					from "@site/i18n/en/presets/NotFinished.mdx";
+import ImproveSection				from "@site/i18n/en/presets/ImproveSection.mdx";
+import SwitchView					from "@site-comps/SwitchView";
+import Tabs							from "@theme/Tabs";
+import TabItem						from "@theme/TabItem";
+import { Since, Until, Removed }	from "@site-comps/Versions";
 
 <!------------------ Codes ----------------->
 
@@ -30,8 +31,6 @@ import OverviewDetailedPmr from "./_codes/vector/main-page/overview/overview-det
 import DeductionGuides from "./_codes/vector/main-page/deduction-guides.mdx"
 
 <NotFinished />
-
-# Vector class reference
 
 ## Overview
 
@@ -76,8 +75,8 @@ The storage of the `vector` is handled automatically, being expanded and contrac
 Vectors usually occupy more space than static arrays, because more memory is allocated
 to handle future growth. This way a vector does not need to reallocate each time an element
 is inserted, but only when the additional memory is exhausted. The total amount of allocated
-memory can be queried using [`capacity()`](capacity) function. Extra memory can be returned to the
-system via a call to [`shrink_to_fit()`](shrink_to_fit) <i><small>(since C++11)</small></i>.
+memory can be queried using [`capacity()`](capacity) function. <Since v="cpp11">
+Extra memory can be returned to the system via a call to <a href="shrink_to_fit"><code>shrink_to_fit()</code></a></Since>
 
 Reallocations are usually costly operations in terms of performance.
 The [`reserve()`](reserve) function can be used to eliminate reallocations
@@ -107,7 +106,7 @@ The complexity (efficiency) of common operations on vectors is as follows:
 - [`Container`](/docs/named_req/Container)
 - [`AllocatorAwareContainer`](/docs/named_req/AllocatorAwareContainer)
 - [`SequenceContainer`](/docs/named_req/SequenceContainer)
-- [`ContiguousContainer`](/docs/named_req/ContiguousContainer) <small>(since C++17)</small>
+- <Since v="cpp17"><a href="/docs/named_req/ContiguousContainer">ContiguousContainer</a></Since>
 - [`ReversibleContainer`](/docs/named_req/ReversibleContainer)
 
 </div>
@@ -151,11 +150,11 @@ The type must meet the requirements of <a href="/docs/named_req/Allocator">Alloc
 		{
 			"since-cpp20":
 				<>
-					The program is <b>ill-formed</b> if <code>Allocator::value_type</code> is not the same as <code>T</code>.
+					<span className="inline-caution">The program is <b>ill-formed</b> if <code>Allocator::value_type</code> is not the same as <code>T</code></span>.
 				</>,
 			"until-cpp20":
 				<>
-					The behavior is <b>undefined</b> if <code>Allocator::value_type</code> is not the same as <code>T</code>.
+					<span className="inline-danger">The behavior is <b>undefined</b> if <code>Allocator::value_type</code> is not the same as <code>T</code></span>.
 				</>,
 		}
 	}/>
@@ -186,32 +185,36 @@ See [technical details](#technical-details) for more detailed information.
 	<Symbol pub name="reference"				desc={<code>value_type&amp;</code>}/>
 	<Symbol pub name="const_reference"			desc={<code>value_type const&amp;</code>}/>
 	<Symbol pub name="pointer">
-		<code>Allocator::pointer</code> <small>(until C++11)</small><br/>
-		<code>std::allocator_traits&lt;Allocator&gt;::pointer</code> <small>(since C++11)</small>
+		<Until v="cpp11"><code>Allocator::pointer</code></Until><br/>
+		<Since v="cpp11"><code>std::allocator_traits&lt;Allocator&gt;::pointer</code></Since>
 	</Symbol>
 	<Symbol pub name="const_pointer">
-		<code>Allocator::const_pointer</code> <small>(until C++11)</small><br/>
-		<code>std::allocator_traits&lt;Allocator&gt;::const_pointer</code> <small>(since C++11)</small>
+		<Until v="cpp11"><code>Allocator::const_pointer</code></Until><br/>
+		<Since v="cpp11"><code>std::allocator_traits&lt;Allocator&gt;::const_pointer</code></Since>
 	</Symbol>
 	<Symbol pub name="iterator">
-		<a href="/docs/named_req/LegacyRandomAccessIterator"><code>LegacyRandomAccessIterator</code></a> and&nbsp;
-		<a href="/docs/named_req/LegacyContiguousIterator"><code>LegacyContiguousIterator</code></a> to <code>value_type</code>&nbsp;
-		<small>(until C++20)</small>
+		<Until v="cpp20">
+			<a href="/docs/named_req/LegacyRandomAccessIterator"><code>LegacyRandomAccessIterator</code></a> and&nbsp;
+			<a href="/docs/named_req/LegacyContiguousIterator"><code>LegacyContiguousIterator</code></a> to <code>value_type</code>&nbsp;
+		</Until>
 		<br/>
-		<a href="/docs/named_req/LegacyRandomAccessIterator"><code>LegacyRandomAccessIterator</code></a> and&nbsp;
-		<a href="/docs/named_req/LegacyConstexprIterator"><code>LegacyConstexprIterator</code></a> and&nbsp;
-		<a href="#"><code>contiguous_iterator</code></a> to <code>value_type</code>&nbsp;
-		<small>(since C++20)</small>
+		<Since v="cpp20">
+			<a href="/docs/named_req/LegacyRandomAccessIterator"><code>LegacyRandomAccessIterator</code></a> and&nbsp;
+			<a href="/docs/named_req/LegacyConstexprIterator"><code>LegacyConstexprIterator</code></a> and&nbsp;
+			<a href="#"><code>contiguous_iterator</code></a> to <code>value_type</code>&nbsp;
+		</Since>
 	</Symbol>
 	<Symbol pub name="const_iterator">
-		<a href="/docs/named_req/LegacyRandomAccessIterator"><code>LegacyRandomAccessIterator</code></a> and&nbsp;
-		<a href="/docs/named_req/LegacyContiguousIterator"><code>LegacyContiguousIterator</code></a> to <code>value_type</code>&nbsp;
-		<small>(until C++20)</small>
+		<Until v="cpp20">
+			<a href="/docs/named_req/LegacyRandomAccessIterator"><code>LegacyRandomAccessIterator</code></a> and&nbsp;
+			<a href="/docs/named_req/LegacyContiguousIterator"><code>LegacyContiguousIterator</code></a> to <code>value_type</code>&nbsp;
+		</Until>
 		<br/>
-		<a href="/docs/named_req/LegacyRandomAccessIterator"><code>LegacyRandomAccessIterator</code></a> and&nbsp;
-		<a href="/docs/named_req/LegacyConstexprIterator"><code>LegacyConstexprIterator</code></a> and&nbsp;
-		<a href="#"><code>contiguous_iterator</code></a> to <code>const value_type</code>&nbsp;
-		<small>(since C++20)</small>
+		<Since v="cpp20">
+			<a href="/docs/named_req/LegacyRandomAccessIterator"><code>LegacyRandomAccessIterator</code></a> and&nbsp;
+			<a href="/docs/named_req/LegacyConstexprIterator"><code>LegacyConstexprIterator</code></a> and&nbsp;
+			<a href="#"><code>contiguous_iterator</code></a> to <code>const value_type</code>&nbsp;
+		</Since>
 	</Symbol>
 	<Symbol pub name="reverse_iterator"			desc={<><a href="#"><code>std::reverse_iterator&lt;iterator&gt;</code></a></>}/>
 	<Symbol pub name="const_reverse_iterator"	desc={<><a href="#"><code>std::reverse_iterator&lt;const_iterator&gt;</code></a></>}/>
@@ -220,58 +223,58 @@ See [technical details](#technical-details) for more detailed information.
 ## Member functions
 
 <SymbolTable>
-	<Symbol pub autoLink linkName="constructor" name="(constructor)"
-			desc="Constructs a vector."
-		/>
-	<Symbol pub autoLink linkName="destructor" name="(destructor)"
-			desc="Destroys the vector, deallocating internal storage if used."
-		/>
-	<Symbol pub autoLink linkName="operator_assign" name="operator="
-			desc="Assigns values to the container."
-		/>
-	<Symbol pub autoLink name="assign"
-			desc="Assigns values to the container."
-		/>
-	<Symbol pub autoLink name="get_allocator"
-			desc="Returns the associated allocator."
-		/>
+	<Symbol pub autoLink linkName="constructors" name="(constructors)">
+		Constructs a vector.
+	</Symbol>
+	<Symbol pub autoLink linkName="destructor" name="(destructor)">
+		Destroys the vector, deallocating internal storage if used.
+	</Symbol>
+	<Symbol pub autoLink linkName="operator_assign" name="operator=">
+		Assigns values to the container.
+	</Symbol>
+	<Symbol pub autoLink name="assign">
+		Assigns values to the container.
+	</Symbol>
+	<Symbol pub autoLink name="get_allocator">
+		Returns the associated allocator.
+	</Symbol>
 </SymbolTable>
 
 ### Element access
 
 <SymbolTable>
-	<Symbol pub autoLink name="at"
-			desc={<>Accesses a specified element <b>with bounds checking.</b></>}
-		/>
-	<Symbol pub autoLink linkName="operator_index" name="operator[]"
-			desc="Accesses a specified element."
-		/>
-	<Symbol pub autoLink name="front"
-			desc="Returns the first element."
-		/>
-	<Symbol pub autoLink name="back"
-			desc="Returns the last element."
-		/>
-	<Symbol pub autoLink name="data"
-			desc="Returns a pointer to the first element of the underlying array."
-		/>
+	<Symbol pub autoLink name="at">
+		Accesses a specified element <b>with bounds checking.</b>
+	</Symbol>
+	<Symbol pub autoLink linkName="operator_subscript" name="operator[]">
+		Accesses a specified element.
+	</Symbol>
+	<Symbol pub autoLink name="front">
+		Returns the first element.
+	</Symbol>
+	<Symbol pub autoLink name="back">
+		Returns the last element.
+	</Symbol>
+	<Symbol pub autoLink name="data">
+		Returns a pointer to the first element of the underlying array.
+	</Symbol>
 </SymbolTable>
 
 ### Iterators
 
 <SymbolTable>
-	<Symbol pub autoLink linkName="begin" name={<>begin<br/>cbegin</>}
-			desc={<>Returns an <code>iterator/const_iterator</code> to the beginning.</>}
-		/>
-	<Symbol pub autoLink linkName="end" name={<>end<br/>cend</>}
-			desc={<>Returns an <code>iterator/const_iterator</code> to the end.</>}
-		/>
-	<Symbol pub autoLink linkName="rbegin" name={<>rbegin<br/>crbegin</>}
-			desc={<>Returns a reverse <code>iterator/const_iterator</code> to the beginning.</>}
-		/>
-	<Symbol pub autoLink linkName="rend" name={<>rend<br/>crend</>}
-			desc={<>Returns a reverse <code>iterator/const_iterator</code> to the end.</>}
-		/>
+	<Symbol pub autoLink linkName="begin" name={ <Since v='cpp11'> begin<br/>cbegin </Since> }>
+		Returns an <code>iterator/const_iterator</code> to the beginning.
+	</Symbol>
+	<Symbol pub autoLink linkName="end" name={ <Since v='cpp11'> end<br/>cend </Since> }>
+		Returns an <code>iterator/const_iterator</code> to the end.
+	</Symbol>
+	<Symbol pub autoLink linkName="rbegin" name={ <Since v='cpp11'> rbegin<br/>crbegin </Since> }>
+		Returns a reverse <code>iterator/const_iterator</code> to the beginning.
+	</Symbol>
+	<Symbol pub autoLink linkName="rend" name={ <Since v='cpp11'> rend<br/>crend </Since> }>
+		Returns a reverse <code>iterator/const_iterator</code> to the end.
+	</Symbol>
 </SymbolTable>
 
 ### Capacity
@@ -280,53 +283,53 @@ See [technical details](#technical-details) for more detailed information.
 	<Symbol pub autoLink name="empty">
 		Returns <code>true</code> if the vector is empty, otherwise <code>false</code>.
 	</Symbol>
-	<Symbol pub autoLink name="size"
-			desc="Returns the number of elements."
-		/>
-	<Symbol pub autoLink name="max_size"
-			desc="Returns the maximum possible number of elements."
-		/>
-	<Symbol pub autoLink name="reserve"
-			desc="Reserves storage."
-		/>
-	<Symbol pub autoLink name="capacity"
-			desc="Returns the number of elements that can be held in currently allocated storage."
-		/>
-	<Symbol pub autoLink name={<>shrink_to_fit <small>(since C++11)</small></>} linkName="shrink_to_fit"
-			desc="Reduces memory usage by freeing unused memory."
-		/>
+	<Symbol pub autoLink name="size">
+		Returns the number of elements.
+	</Symbol>
+	<Symbol pub autoLink name="max_size">
+		Returns the maximum possible number of elements.
+	</Symbol>
+	<Symbol pub autoLink name="reserve">
+		Reserves storage.
+	</Symbol>
+	<Symbol pub autoLink name="capacity">
+		Returns the number of elements that can be held in currently allocated storage.
+	</Symbol>
+	<Symbol pub autoLink name={<Since v='cpp11'>shrink_to_fit </Since>} linkName="shrink_to_fit">
+		Reduces memory usage by freeing unused memory.
+	</Symbol>
 </SymbolTable>
 
 ### Operations
 
 <SymbolTable>
-	<Symbol pub autoLink name="clear"
-			desc="Clears the contents."
-		/>
-	<Symbol pub autoLink name="insert"
-			desc="Inserts elements."
-		/>
-	<Symbol pub autoLink name={<>emplace <small>(C++11)</small></>} linkName="emplace"
-			desc="Constructs elements in-place."
-		/>
-	<Symbol pub autoLink name="erase"
-			desc="Removes elements."
-		/>
-	<Symbol pub autoLink name="push_back"
-			desc="Appends an element to the end."
-		/>
-	<Symbol pub autoLink name={<>emplace_back <small>(C++11)</small></>} linkName="emplace_back"
-			desc="Constructs elements in-place at the end."
-		/>
-	<Symbol pub autoLink name="pop_back"
-			desc="Removes the last element."
-		/>
-	<Symbol pub autoLink name="resize"
-			desc="Changes the number of elements stored."
-		/>
-	<Symbol pub autoLink name="swap"
-			desc="Swaps the contents."
-		/>
+	<Symbol pub autoLink name="clear">
+		Clears the contents.
+	</Symbol>
+	<Symbol pub autoLink name="insert">
+		Inserts elements.
+	</Symbol>
+	<Symbol pub autoLink name={<Since v='cpp11'> emplace </Since>} linkName="emplace">
+		Constructs elements in-place.
+	</Symbol>
+	<Symbol pub autoLink name="erase">
+		Removes elements.
+	</Symbol>
+	<Symbol pub autoLink name="push_back">
+		Appends an element to the end.
+	</Symbol>
+	<Symbol pub autoLink name={<Since v='cpp11'> emplace_back </Since>} linkName="emplace_back">
+		Constructs elements in-place at the end.
+	</Symbol>
+	<Symbol pub autoLink name="pop_back">
+		Removes the last element.
+	</Symbol>
+	<Symbol pub autoLink name="resize">
+		Changes the number of elements stored.
+	</Symbol>
+	<Symbol pub autoLink name="swap">
+		Swaps the contents.
+	</Symbol>
 </SymbolTable>
 
 ## Non-member functions
@@ -334,24 +337,24 @@ See [technical details](#technical-details) for more detailed information.
 <SymbolTable noTraits>
 	<Symbol name={<>
 				operator==<br/>
-				operator!= <small>(removed in C++20)</small><br/>
-				operator&lt; <small>(removed in C++20)</small><br/>
-				operator&gt; <small>(removed in C++20)</small><br/>
-				operator&lt;= <small>(removed in C++20)</small><br/>
-				operator&gt;= <small>(removed in C++20)</small><br/>
+				<Removed v='cpp20'> operator!= </Removed> <br />
+				<Removed v='cpp20'> operator&lt; </Removed> <br />
+				<Removed v='cpp20'> operator&gt; </Removed> <br />
+				<Removed v='cpp20'> operator&lt;= </Removed> <br />
+				<Removed v='cpp20'> operator&gt;= </Removed> <br />
 				operator&lt;=&gt;
-			</>}
-			desc="Lexicographically compares the values in the vector."
-		/>
-	<Symbol name={<>std::swap <small>(std::vector)</small></>}
-			desc={<>An overload for a <a href="#">std::swap</a> algorithm.</>}
-		/>
+			</>}>
+			Lexicographically compares the values in the vector.
+	</Symbol>
+	<Symbol name={<>std::swap <small>(std::vector)</small></>}>
+			An overload for a <a href="#">std::swap</a> algorithm.
+	</Symbol>
 	<Symbol name={<>
 				erase <small>(std::vector)</small><br/>
 				erase_if <small>(std::vector)</small>
-			</>}
-			desc={<>Overloads for <a href="#">std::erase/std::erase_if</a> algorithms.</>}
-		/>
+			</>}>
+			Overloads for <a href="#">std::erase/std::erase_if</a> algorithms.
+	</Symbol>
 </SymbolTable>
 
 </ClassSummary>

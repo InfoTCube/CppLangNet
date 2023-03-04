@@ -31,9 +31,11 @@ import OverviewDetailedReguler		from "./priority-queue/_codes/main-page/overview
 <!-- Deduction Guides -->
 import DeductionGuides				from "./priority-queue/_codes/main-page/deduction-guides.mdx"
 
-<NotFinished />
+import TemplateParamContainerExplanation from "./priority-queue/_codes/main-page/template-parameters/container.mdx";
+import TemplateParamTExplanation from "./priority-queue/_codes/main-page/template-parameters/t.mdx";
+import TemplateParamCompareExplanation from "./priority-queue/_codes/main-page/template-parameters/compare.mdx";
 
-# Priority queue class reference
+<NotFinished />
 
 ## Overview
 
@@ -50,9 +52,7 @@ import DeductionGuides				from "./priority-queue/_codes/main-page/deduction-guid
 </TabItem>
 </Tabs>
 
-Priority queue is a container **adapter**.
-
-It adapts a container by providing a new interface to it.
+Priority queue is a container **adapter** - it adapts a container by providing a new interface to it.
 
 The new interface resembles a queue with a specified order that's not based on the order of insertion,
 but rather based on some specified relation between the elements.
@@ -77,25 +77,15 @@ Working with a `priority_queue` is similar to managing a heap in some random acc
 <SymbolTable noTraits>
 	<Symbol
 			name="T"
-			desc={<>
-				The type of the stored elements.
-				The behaviour is undefined if <code>T</code> is not <code>Container::value_type</code>.
-				</>}
+			desc={<TemplateParamTExplanation/>}
 		/>
 	<Symbol
 			name="Container"
-			desc={<>
-				The type of the underlying container used to store the elements.
-				By default <a href="/docs/containers/arays/vector"><code>std::vector&lt;T&gt;</code></a>.
-				The container must satisfy <a href="/docs/named_req/SequenceContainer">SequenceContainer</a> and
-				it's iterators must satisfy <a href="/docs/named_req/LegacyRandomAccessIterator">LegacyRandomAccessIterator</a>.
-				</>}
+			desc={<TemplateParamContainerExplanation/>}
 		/>
 	<Symbol
 			name="Compare"
-			desc={<>
-				A comparator type satisfying <a href="/docs/named_req/Compare">Compare</a>.
-				</>}
+			desc={<TemplateParamCompareExplanation/>}
 		/>
 </SymbolTable>
 
@@ -113,10 +103,10 @@ Working with a `priority_queue` is similar to managing a heap in some random acc
 ## Member functions
 
 <SymbolTable>
-	<Symbol pub autoLink linkName="constructor" name="(constructor)">
+	<Symbol pub autoLink linkName="constructors" name="(constructors)">
 		Constructs a <code>priority_queue</code>.
 	</Symbol>
-	<Symbol pub autoLink linkName="destructor" name="(destructor)">
+	<Symbol pub autoLink linkName="destructors" name="(destructor)">
 		Destructs a <code>priority_queue</code>.
 	</Symbol>
 	<Symbol pub autoLink linkName="operator_assign" name="operator="
@@ -145,13 +135,13 @@ Working with a `priority_queue` is similar to managing a heap in some random acc
 	<Symbol pub autoLink name="push"
 			desc={<>Inserts an element and sorts the underlying container using <code>Compare</code>.</>}
 		/>
-	<Symbol pub autoLink name="emplace"
+	<Symbol pub autoLink linkName="emplace" name={<>emplace <small>(since C++11)</small> </>}
 			desc="Constructs an element in-place and sorts the underlying container."
 		/>
 	<Symbol pub autoLink name="pop"
 			desc="Removes the top element."
 		/>
-	<Symbol pub autoLink name="swap"
+	<Symbol pub autoLink linkName="swap" name={<>swap <small>(since C++11)</small> </>}
 			desc="Swaps two queues."
 		/>
 </SymbolTable>
@@ -160,7 +150,7 @@ Working with a `priority_queue` is similar to managing a heap in some random acc
 
 <SymbolTable>
 	<Symbol prot name={<><code>Container</code> C</>}
-			desc={<>The underlying container. By default <a href="/docs/containers/arrays/vector"><code>std::vector&lt;T&gt;</code></a>.</>}
+			desc={<>The underlying container. By default <a href="/docs/std/containers/arrays/vector"><code>std::vector&lt;T&gt;</code></a>.</>}
 		/>
 	<Symbol prot name={<><code>Compare</code> comp</>} desc="The comparator object." />
 </SymbolTable>

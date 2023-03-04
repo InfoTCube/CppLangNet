@@ -35,17 +35,13 @@
     "message": "💻 Przykłady",
     "description": "The label for category 💻 Examples in sidebar defaultSidebar"
   },
+  "sidebar.defaultSidebar.category.4. Conditions": {
+    "message": "4. Warunki",
+    "description": "The label for category 4. Conditions in sidebar defaultSidebar"
+  },
   "sidebar.defaultSidebar.category.5. Arrays": {
     "message": "5. Tablice",
     "description": "The label for category 5. Arrays in sidebar defaultSidebar"
-  },
-  "sidebar.defaultSidebar.category.Golden advices 💰": {
-    "message": "Złote rady 💰",
-    "description": "The label for category Golden advices 💰 in sidebar defaultSidebar"
-  },
-  "sidebar.defaultSidebar.category.9. Classes (I)": {
-    "message": "9. Klasy (I)",
-    "description": "The label for category 9. Classes (I) in sidebar defaultSidebar"
   },
   "sidebar.defaultSidebar.category.10. Memory (I)": {
     "message": "10. Pamięć (I)",
@@ -78,5 +74,37 @@
   "sidebar.defaultSidebar.category.6. Functions and operators": {
     "message": "6. Funkcje i operatory",
     "description": "The label for category 6. Functions and operators in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.9. Classes": {
+    "message": "9. Klasy",
+    "description": "The label for category 9. Classes in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Advices 💰": {
+    "message": "Dobre rady 💰",
+    "description": "The label for category Advices 💰 in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.1. First program": {
+    "message": "1. Pierwszy program",
+    "description": "The label for category 1. First program in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.3. Strings": {
+    "message": "3. Napisy",
+    "description": "The label for category 3. Strings in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.doc.🐞 Common problems": {
+    "message": "🐞 Częste problemy",
+    "description": "The label for the doc item 🐞 Common problems in sidebar defaultSidebar, linking to the doc course/basics/variables/strings/common-problems"
+  },
+  "sidebar.defaultSidebar.doc.📚 Exercises": {
+    "message": "📚 Ćwiczenia",
+    "description": "The label for the doc item 📚 Exercises in sidebar defaultSidebar, linking to the doc course/basics/variables/strings/exercises"
+  },
+ "sidebar.defaultSidebar.doc.✅ Tips and style": {
+   "message": "✅ Wskazówki i styl",
+   "description": "The label for ✅ Tips and style in sidebar defaultSidebar"
+ },
+  "sidebar.defaultSidebar.doc.💡 Examples": {
+    "message": "💡 Przykłady",
+    "description": "The label for the doc item 💡 Examples in sidebar defaultSidebar, linking to the doc course/basics/variables/strings/examples"
   }
 }

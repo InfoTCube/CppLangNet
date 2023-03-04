@@ -13,7 +13,6 @@ import ClassSummary				from "@site-comps/ClassSummary";
 import SymbolTable, { Symbol }	from "@site-comps/SymbolTable";
 import Columns					from "@site-comps/Columns";
 import NotFinished				from "@site/i18n/en/presets/NotFinished.mdx";
-import ImproveSection			from "@site/i18n/en/presets/ImproveSection.mdx";
 import Tabs						from "@theme/Tabs";
 import TabItem					from "@theme/TabItem";
 
@@ -29,9 +28,10 @@ import OverviewDetailedReguler		from "./queue/_codes/main-page/overview/overview
 <!-- Deduction Guides -->
 import DeductionGuides				from "./queue/_codes/main-page/deduction-guides.mdx";
 
-<NotFinished />
+import TemplateParamContainerExplanation from "./queue/_codes/main-page/template-parameters/container.mdx";
+import TemplateParamTExplanation from "./queue/_codes/main-page/template-parameters/t.mdx";
 
-# Queue class reference
+<NotFinished />
 
 ## Overview
 
@@ -48,11 +48,9 @@ import DeductionGuides				from "./queue/_codes/main-page/deduction-guides.mdx";
 </TabItem>
 </Tabs>
 
-Queue is a container **adapter**
+Queue is a container **adapter** - it adapts a container by providing a new interface to it.
 
-It adapts a container by providing a new interface to it.
-
-The new interface resembles a queue, a FIFO (First In First Out) data structure.
+The new interface is a **FIFO** (**F**irst **I**n **F**irst **O**ut) data structure.
 This means that the first element to be pushed is the first one to be accessed (like in a shop queue - first person to get in is the first person to be served).
 
 <details>
@@ -74,18 +72,11 @@ The queue pushes the elements on the back of the underlying container and pops t
 <SymbolTable noTraits>
 	<Symbol
 			name="T"
-			desc={<>
-				The type of the stored elements.
-				The behaviour is undefined if <code>T</code> is not <code>Container::value_type</code>.
-				</>}
+			desc={<TemplateParamTExplanation/>}
 		/>
 	<Symbol
 			name="Container"
-			desc={<>
-				The type of the underlying container used to store the elements.
-				By default <a href="/docs/containers/arays/vector"><code>std::deque&lt;T&gt;</code></a>.
-				The container must satisfy <a href="/docs/named_req/SequenceContainer">SequenceContainer</a>.
-				</>}
+			desc={<TemplateParamContainerExplanation/>}
 		/>
 </SymbolTable>
 
@@ -102,10 +93,10 @@ The queue pushes the elements on the back of the underlying container and pops t
 ## Member functions
 
 <SymbolTable>
-	<Symbol pub autoLink linkName="constructor" name="(constructor)">
+	<Symbol pub autoLink linkName="constructors" name="(constructors)">
 		Constructs a <code>queue</code>.
 	</Symbol>
-	<Symbol pub autoLink linkName="destructor" name="(destructor)">
+	<Symbol pub autoLink linkName="destructors" name="(destructor)">
 		Destructs a <code>queue</code>.
 	</Symbol>
 	<Symbol pub autoLink linkName="operator_assign" name="operator="
@@ -139,13 +130,13 @@ The queue pushes the elements on the back of the underlying container and pops t
 	<Symbol pub autoLink name="push"
 			desc="Inserts a new element at the end."
 		/>
-	<Symbol pub autoLink name="emplace"
+	<Symbol pub autoLink name={<>emplace <small>(since C++11)</small></>} linkName="emplace"
 			desc="Constructs a new element in-place at the end."
 		/>
 	<Symbol pub autoLink name="pop"
 			desc={<>Removes the first pushed element (the one that would've been returned by <code>queue.front()</code>).</>}
 		/>
-	<Symbol pub autoLink name="swap"
+	<Symbol pub autoLink name={<>swap <small>(since C++11)</small></>} linkName="swap"
 			desc="Swaps two queues."
 		/>
 </SymbolTable>
@@ -154,7 +145,7 @@ The queue pushes the elements on the back of the underlying container and pops t
 
 <SymbolTable>
 	<Symbol prot name={<><code>Container</code> C</>}
-			desc={<>The underlying container. By default <a href="/docs/containers/arrays/deque"><code>std::deque&lt;T&gt;</code></a>.</>}
+			desc={<>The underlying container. By default <a href="/docs/containers/queues/deque"><code>std::deque&lt;T&gt;</code></a>.</>}
 		/>
 </SymbolTable>
 

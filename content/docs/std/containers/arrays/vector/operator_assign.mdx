@@ -3,7 +3,7 @@ title:					vector<...>::operator=
 sidebar_label:			operator=
 description:			vector<...>::operator= method C++ documentation
 hide_title:				true
-tags:					[vector, assign, copy, operator_assign]
+tags:					[vector, assign, copy, move, operator_assign]
 
 cppreference_origin_rel: w/cpp/container/vector/operator=
 ---
@@ -25,8 +25,8 @@ import Method_SinceCpp11	from './_codes/operator_assign/since-cpp11.mdx';
 import Method_SinceCpp17	from './_codes/operator_assign/since-cpp17.mdx';
 import Method_SinceCpp20	from './_codes/operator_assign/since-cpp20.mdx';
 
-import CopyAssignment_SinceCpp11_Note from './_codes/operator_assign/other/copy-assignment-since-cpp11-note.mdx';
-import SinceCpp17_Exceptions from './_codes/operator_assign/other/since-cpp17-exceptions.mdx';
+import Explanation_CopyAssignmentNote_SinceCpp11 from './_codes/operator_assign/explanation/copy-assignment-note-since-cpp11.mdx';
+import NoexceptSpecification_Since_Cpp17 from './_codes/operator_assign/noexcept-specification/since-cpp17.mdx'
 
 # std::vector operator=
 
@@ -41,51 +41,56 @@ Replaces the contents of the container with the contents of another.
 
  - **(1)** **Copy** assignment operator. Replaces the contents with a copy of the contents of `other`.
     <SwitchView content={{
-            'since-cpp11': <CopyAssignment_SinceCpp11_Note />
-        }} />
+		'since-cpp11': <Explanation_CopyAssignmentNote_SinceCpp11 />
+	}} />
 
  - **(2)** **Move** assignment operator. Replaces the contents with those of other using move semantics (i.e. the data in other is moved from other into this container).
-:::important
-`other` is in a valid but unspecified state afterwards.
-:::
+
+	:::important
+	`other` is in a valid but unspecified state afterwards.
+	:::
+
     If `std::allocator_traits<Alloc>::propagate_on_container_move_assignment::value` is `true`, the allocator of `*this` is replaced by a copy of that of other.
 
     If it is false and the allocators of `*this` and other do not compare equal, `*this` cannot take ownership of the memory owned by other and must move-assign each element individually,
     allocating additional memory using its own allocator as needed.
-    
+
     In any case, all elements originally belong to `*this` are either destroyed or replaced by element-wise move-assignment.
-            
+
  - **(3)** Replaces the contents with those identified by initializer list `ilist`.
 
 ### Parameters
 
  - `other` - another container to use as data source
  - `ilist` - initializer list to use as data source
- 
+
 ### Return value
 
 `*this`
 
 ### Complexity
 
- - **(1)** Linear in the size of `*this` and other.
- - **(2)** Linear in the size of `*this` unless the allocators do not compare equal and do not propagate, in which case linear in the size of `*this` and other.
- - **(3)** Linear in the size of `*this` and `ilist`.
+ - **(1)** Linear in the size of `*this` and `other` - **O(size() + other.size(())**.
+ - **(2)** 
+	Linear in the size of `*this` - **O(size())**.  
+	If allocators do not compare equal and do not propagate, linear in the size of `*this` and `other` - **O(size() + other.size())**.
+
+ - **(3)** Linear in the size of `*this` and `ilist` - **O(size() + ilist.size())**.
 
 ### Exceptions
 
 <SwitchView content={{
-        'since-cpp17': <SinceCpp17_Exceptions />,
-        'until-cpp17': <> 
-        May throw implementation-defined exceptions.
-        </>
-    }} />
+	'since-cpp17': <NoexceptSpecification_Since_Cpp17 />,
+	'until-cpp17': <>
+		May throw implementation-defined exceptions.
+	</>
+}} />
 
 ### Notes
 
 After container move assignment (overload **(2)**), unless element-wise move assignment is forced by incompatible allocators, references, pointers,
 and iterators (other than the end iterator) to other remain valid, but refer to elements that are now in `*this`.
-The current standard makes this guarantee via the blanket statement in [container.requirements.general]/12, and a more direct guarantee is under consideration via **LWG 2321**.
+The current standard makes this guarantee via the blanket statement in `[container.requirements.general]/12`, and a more direct guarantee is under consideration via [**LWG 2321**](https://cplusplus.github.io/LWG/issue2321).
 
 ### Example
 

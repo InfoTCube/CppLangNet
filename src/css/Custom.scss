@@ -4,6 +4,9 @@
  * work well for content-centric websites.
  */
 
+@import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css?family=Barlow');
+@import url('https://fonts.googleapis.com/css?family=JetBrains+Mono');
 
  /* You can override the default Infima variables here. */
 :root {
@@ -17,6 +20,7 @@
 
 	--ifm-code-font-size: 95%;
 	font-variant-ligatures: none;
+	--font-inter: "Inter", "Segoe UI", "Open Sans", "Helvetica Neue", system-ui, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 footer.footer--dark a {
@@ -34,8 +38,10 @@ html[data-theme='dark']
 	--ifm-color-primary-lightest:	#64e7ff;
 }
 
-
 @import './Code.scss';
 @import './Logos.scss';
+@import './Navbar.scss';
 @import './Sidebar.scss';
+@import './Tabs.scss';
+@import './Text.scss';
 @import './InlineAdmonitions.scss';
